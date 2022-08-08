@@ -175,7 +175,7 @@ function Home() {
           .call();
         if (mintWLContractMethod && mintWL) {
           setCanMintWL(mintWL);
-          setFeedback(`Welcome Whitelist Member, you can mint up to ${nftMintedByUser} NFTs`)
+          setFeedback(`Welcome Whitelist Member, you can mint your NFTs Now`)
         } else {
           setFeedback(`Sorry, your wallet is not on the whitelist`);
           setDisable(true);
@@ -190,14 +190,14 @@ function Home() {
           .call();
         if (mintEAContractMethod && mintEarly) {
           setCanMintEA(mintEarly);
-          setFeedback(`Welcome Early Access Member, you can mint up to ${nftMintedByUser} NFTs`)
+          setFeedback(`Welcome Early Access Member, you can mint your NFTs Now`)
         } else {
           setFeedback(`Sorry, your wallet is not on the Early Access list`);
           setDisable(true);
         }
       }
       else {
-        setFeedback(`Welcome, you can mint up to ${nftMintedByUser} NFTs per transaction`)
+        // setFeedback(`Welcome, you can mint up to ${nftMintedByUser} NFTs per transaction`)
       }
     }
   };

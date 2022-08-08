@@ -7,7 +7,6 @@ import whitelistAddresses from "../walletAddresses";
 import earlyAccessAddresses from "../walletAddressesEarlyAccess";
 import Loader from "../../components/Loader/loader";
 // Add this import line at the top
-import { CrossmintPayButton } from "@crossmint/client-sdk-react-ui";
 const { createAlchemyWeb3 } = require("@alch/alchemy-web3");
 const web3 = createAlchemyWeb3("https://eth-rinkeby.alchemyapi.io/v2/ZCPBNYUftxVke8HqYhmQZXKEmfmrb80R");
 var Web3 = require('web3');
@@ -165,8 +164,6 @@ function Home() {
 
       // Nft states
       if (currentState == 1) {
-        let totalWLNfts = 54;
-        supply < totalWLNfts && nftMintedByUser != 0 ? setDisable(false) : setDisable(true);
         const claimingAddress = keccak256(blockchain.account);
         // `getHexProof` returns the neighbour leaf and all parent nodes hashes that will
         // be required to derive the Merkle Trees root hash.
@@ -184,8 +181,6 @@ function Home() {
           setDisable(true);
         }
       } else if (currentState == 2) {
-        let totalEANfts = 150;
-        supply < totalEANfts && nftMintedByUser != 0 ? setDisable(false) : setDisable(true);
         const claimingAddress = keccak256(blockchain.account);
         const hexProof = merkleTreeEarly.getHexProof(claimingAddress);
         setProof(hexProof);
@@ -202,8 +197,6 @@ function Home() {
         }
       }
       else {
-        let totalPublic = 500;
-        supply < totalPublic ? setDisable(false) : setDisable(true);
         setFeedback(`Welcome, you can mint up to ${nftMintedByUser} NFTs per transaction`)
       }
     }
@@ -242,13 +235,13 @@ function Home() {
       setMax(0);
     }
     else if (currentState == 2) {
-      setStatusAlert("EARLY ACCESS IS NOW LIVE!");
+      setStatusAlert("PRE SALE IS NOW LIVE!");
       let earlyAccessCost = await contract.methods
         .costEarlyAccess()
         .call();
       setDisplayCost(web3.utils.fromWei(earlyAccessCost));
       setNftCost(web3.utils.fromWei(earlyAccessCost));
-      setFeedback("Have you got the Early Access?");
+      setFeedback("Have you got the Pre Sale?");
 
       let earlyMax = await contract.methods
         .maxMintAmountEarlyAccess()
@@ -426,15 +419,7 @@ function Home() {
             </>
           )}
            <s.SpacerLarge />
-          <s.Container ai={"center"} jc={"center"} fd={"row"}>
-            <CrossmintPayButton
-              collectionTitle="Ace Miners NFT"
-              collectionDescription="Ace Miners NFT"
-              collectionPhoto=""
-              clientId="6209efaf-61b5-499d-9707-63ee699306b8"
-              mintConfig={{"_mintAmount": mintAmount, "totalPrice": displayCost}}                        
-            />
-          </s.Container>
+
           <s.SpacerLarge />
           {blockchain.errorMsg !== "" ? (
             <s.connectButton

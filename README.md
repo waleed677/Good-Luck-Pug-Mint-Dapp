@@ -1,8 +1,8 @@
-# AceMiners NFT's Mint Page
+# Good Luck Pug NFT's Mint Page + Smart Contract
 
 
 ## Website Link
-https://mint.aceminersnft.io/
+https://www.goodluckpug.com/
 
 
 # Fleek Web access

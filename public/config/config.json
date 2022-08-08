@@ -1,0 +1,25 @@
+{
+  "CONTRACT_ADDRESS": "0x643460Dfdd981655E0B1BB01516082d3798EcFF4",
+  "SCAN_LINK": "https://etherscan.io/address/0x643460Dfdd981655E0B1BB01516082d3798EcFF4",
+  "NETWORK": {
+    "NAME": "Ethereum Rinkeby",
+    "SYMBOL": "ETH",
+    "ID": 4
+  },
+  "NETWORK_ID_WALLET": 4,
+  "NFT_NAME": "Good Luck Pug NFT NFT",
+  "SYMBOL": "GLP",
+  "MAX_SUPPLY": 2000 ,
+  "WEI_COST_OG": 100000000000000000,
+  "DISPLAY_COST_OG": 0.1,
+  "WEI_COST_WL": 180000000000000000,
+  "DISPLAY_COST_WL": 0.18,
+  "WEI_COST_PU": 220000000000000000,
+  "DISPLAY_COST_PU": 0.22,
+  "MAX_LIMIT_OG": 2,
+  "MAX_LIMIT_WL": 1,
+  "GAS_LIMIT": 285000,
+  "MARKETPLACE": "Opeansea",
+  "MARKETPLACE_LINK": "https://opensea.io/collection/mutant-age-camel-club",
+  "SHOW_BACKGROUND": true
+}

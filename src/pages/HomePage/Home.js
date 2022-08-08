@@ -212,7 +212,7 @@ function Home() {
 
 
     const abi = await abiResponse.json();
-    var contract = new Contract(abi, '0x643460Dfdd981655E0B1BB01516082d3798EcFF4');
+    var contract = new Contract(abi, '0x25fD56048d1d786EBe85f8c433b9Ae24FD2Cf3A6');
     contract.setProvider(web3.currentProvider);
     // Get Total Supply
     const totalSupply = await contract.methods
@@ -307,6 +307,7 @@ function Home() {
 
       <s.FlexContainer jc={"center"} ai={"center"} fd={"row"}
       >
+      <s.Image src={"config/images/drops.png"} />
         <s.Mint>
           <s.TextTitle
             size={3.0}

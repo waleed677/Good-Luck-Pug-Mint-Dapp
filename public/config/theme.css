@@ -8,11 +8,11 @@
 }
 
 body {
-  /* background: #3491F9 !important; */
-  background-image: url("./images/bg.png") !important;
+  background: #08b6e7 !important;
+  /* background-image: url("./images/bg.jpeg") !important;
   background-repeat: no-repeat;
   background-size: cover;
-  background-position: top;
+  background-position: top; */
 }
 
 .flexContainer {

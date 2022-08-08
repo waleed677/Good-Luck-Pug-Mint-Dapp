@@ -304,7 +304,11 @@ function Home() {
     <>
 
       {loading && <Loader />}
-
+      <a href="https://www.goodluckpug.com/">
+    <s.Image src={"config/images/logo.png"} wid={6} style={{
+      marginTop: "5vh",
+    }} />
+    </a>
       <s.FlexContainer jc={"center"} ai={"center"} fd={"row"}
       >
       <s.Image src={"config/images/drops.png"} />

@@ -122,15 +122,15 @@ export const row = styled.div`
 `;
 
 export const Mint = styled.div`
-  padding: 25px 40px;
+  padding: 25px 35px;
   border-radius: 25px;
-  width: 40%;
+  width: 35%;
   margin: 0;
   position: absolute;
-  top: 50%;
+  top: 55%;
   -ms-transform: translateY(-50%);
   transform: translateY(-50%);
-  background: rgba(0,0,0,0.9);
+  background: rgba(0,0,0,0.5);
   box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.19);
 
   @media screen and (max-width: 1024px) {
@@ -145,7 +145,7 @@ export const Mint = styled.div`
 
   @media screen and (max-width: 480px) {
     width: 95%;
-    margin-top:0vh;
+    margin-top:7vh;
     padding: 20px 20px;
   }
 `;
@@ -164,11 +164,11 @@ export const Image = styled.img`
   width: ${({ wid }) => (wid ? wid + "%" : "100%")};
   transition: width 0.5s;
   transition: height 0.5s;
-  margin-top: 20px;
+  margin-top: 40px;
   display: block;
   margin: 0 auto;
   @media (max-width: 767px) {
-    width: 100%;
+    width: 20%;
     margin-top: 0;
   }
 `;
@@ -207,9 +207,10 @@ export const connectButton = styled.button`
 
 export const maxButton = styled.button`
   width: 20%;
-  background: #2ecc71;
+  background: #7551E7;
   height: 50px;
   border-radius: 10px;
+  border-color: #7551E7;
   font-family: "wonder";
   font-size: 1.5rem;
   color: #fff !important ;

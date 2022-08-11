@@ -11,22 +11,6 @@ const { createAlchemyWeb3 } = require("@alch/alchemy-web3");
 const web3 = createAlchemyWeb3("https://eth-rinkeby.alchemyapi.io/v2/ZCPBNYUftxVke8HqYhmQZXKEmfmrb80R");
 var Web3 = require('web3');
 var Contract = require('web3-eth-contract');
-const { MerkleTree } = require('merkletreejs');
-const keccak256 = require('keccak256');
-
-// Whitelist MerkleTree
-const leafNodes = whitelistAddresses.map(addr => keccak256(addr));
-const merkleTree = new MerkleTree(leafNodes, keccak256, { sortPairs: true });
-const rootHash = merkleTree.getRoot();
-console.log('Whitelist Merkle Tree\n', merkleTree.toString());
-
-
-// EarlyAccess MerkleTree
-const leafNodesEarly = earlyAccessAddresses.map(addr => keccak256(addr));
-const merkleTreeEarly = new MerkleTree(leafNodesEarly, keccak256, { sortPairs: true });
-const rootHashEarly = merkleTreeEarly.getRoot();
-console.log('Early Access Tree\n', merkleTreeEarly.toString());
-
 
 
 function Home() {
@@ -43,7 +27,6 @@ function Home() {
   const [displayCost, setDisplayCost] = useState(0);
   const [state, setState] = useState(-1);
   const [nftCost, setNftCost] = useState(-1);
-  const [canMintWL, setCanMintWL] = useState(false);
   const [canMintEA, setCanMintEA] = useState(false);
   const [disable, setDisable] = useState(false);
   const [max, setMax] = useState(0);
@@ -81,7 +64,7 @@ function Home() {
     setLoading(true);
 
     blockchain.smartContract.methods
-      .mint(mintAmount, proof)
+      .mint(mintAmount)
       .send({
         gasLimit: String(totalGasLimit),
         to: CONFIG.CONTRACT_ADDRESS,
@@ -160,45 +143,6 @@ function Home() {
         .mintableAmountForUser(blockchain.account)
         .call();
       setMax(nftMintedByUser);
-      console.log({ nftMintedByUser });
-
-      // Nft states
-      if (currentState == 1) {
-        const claimingAddress = keccak256(blockchain.account);
-        // `getHexProof` returns the neighbour leaf and all parent nodes hashes that will
-        // be required to derive the Merkle Trees root hash.
-        const hexProof = merkleTree.getHexProof(claimingAddress);
-        setProof(hexProof);
-        let mintWL = merkleTree.verify(hexProof, claimingAddress, rootHash);
-        let mintWLContractMethod = await blockchain.smartContract.methods
-          .isWhitelisted(blockchain.account, hexProof)
-          .call();
-        if (mintWLContractMethod && mintWL) {
-          setCanMintWL(mintWL);
-          setFeedback(`Welcome Whitelist Member, you can mint your NFTs Now`)
-        } else {
-          setFeedback(`Sorry, your wallet is not on the whitelist`);
-          setDisable(true);
-        }
-      } else if (currentState == 2) {
-        const claimingAddress = keccak256(blockchain.account);
-        const hexProof = merkleTreeEarly.getHexProof(claimingAddress);
-        setProof(hexProof);
-        let mintEarly = merkleTreeEarly.verify(hexProof, claimingAddress, rootHashEarly);
-        let mintEAContractMethod = await blockchain.smartContract.methods
-          .isEarlyAccess(blockchain.account, hexProof)
-          .call();
-        if (mintEAContractMethod && mintEarly) {
-          setCanMintEA(mintEarly);
-          setFeedback(`Welcome Early Access Member, you can mint your NFTs Now`)
-        } else {
-          setFeedback(`Sorry, your wallet is not on the Early Access list`);
-          setDisable(true);
-        }
-      }
-      else {
-        // setFeedback(`Welcome, you can mint up to ${nftMintedByUser} NFTs per transaction`)
-      }
     }
   };
 
@@ -212,7 +156,7 @@ function Home() {
 
 
     const abi = await abiResponse.json();
-    var contract = new Contract(abi, '0x25fD56048d1d786EBe85f8c433b9Ae24FD2Cf3A6');
+    var contract = new Contract(abi, '0x80438CC99DA9eE1D4b0f33CF28b8C7E31ef41457');
     contract.setProvider(web3.currentProvider);
     // Get Total Supply
     const totalSupply = await contract.methods
@@ -241,26 +185,12 @@ function Home() {
         .call();
       setDisplayCost(web3.utils.fromWei(earlyAccessCost));
       setNftCost(web3.utils.fromWei(earlyAccessCost));
-      setFeedback("Have you got the Pre Sale?");
+      setFeedback("Only The First 500 NFTs are available for Pre Sale");
 
       let earlyMax = await contract.methods
         .maxMintAmountEarlyAccess()
         .call();
       setMax(earlyMax);
-    }
-    else if (currentState == 1) {
-      let wlCost = await contract.methods
-        .costWL()
-        .call();
-      setDisplayCost(web3.utils.fromWei(wlCost));
-      setNftCost(web3.utils.fromWei(wlCost));
-      setStatusAlert("WHITELIST IS NOW LIVE!");
-      setFeedback("Are you Whitelisted Member?");
-
-      let wlMax = await contract.methods
-        .maxMintAmountWL()
-        .call();
-      setMax(wlMax);
     }
     else {
       let puCost = await contract.methods

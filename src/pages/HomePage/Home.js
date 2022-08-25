@@ -8,7 +8,7 @@ import earlyAccessAddresses from "../walletAddressesEarlyAccess";
 import Loader from "../../components/Loader/loader";
 // Add this import line at the top
 const { createAlchemyWeb3 } = require("@alch/alchemy-web3");
-const web3 = createAlchemyWeb3("https://eth-rinkeby.alchemyapi.io/v2/ZCPBNYUftxVke8HqYhmQZXKEmfmrb80R");
+const web3 = createAlchemyWeb3("https://eth-mainnet.alchemyapi.io/v2/ZCPBNYUftxVke8HqYhmQZXKEmfmrb80R");
 var Web3 = require('web3');
 var Contract = require('web3-eth-contract');
 
@@ -156,7 +156,7 @@ function Home() {
 
 
     const abi = await abiResponse.json();
-    var contract = new Contract(abi, '0x80438CC99DA9eE1D4b0f33CF28b8C7E31ef41457');
+    var contract = new Contract(abi, '0xD85cC92AD80d6576bB5eFc1ca62Cae36B36227F6');
     contract.setProvider(web3.currentProvider);
     // Get Total Supply
     const totalSupply = await contract.methods

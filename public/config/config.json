@@ -4,7 +4,7 @@
   "NETWORK": {
     "NAME": "Ethereum",
     "SYMBOL": "ETH",
-    "ID": `
+    "ID": 1
   },
   "NETWORK_ID_WALLET": 1,
   "NFT_NAME": "Good Luck Pug NFT",
